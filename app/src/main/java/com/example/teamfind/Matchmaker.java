@@ -60,8 +60,8 @@ public class Matchmaker extends AppCompatActivity {
         SimpleAdapter adapter = new SimpleAdapter(this,
                 listdata,
                 R.layout.list_item,
-                new String[]{"username", "contact", "game"},
-                new int[]{R.id.matchmaker_username, R.id.matchmaker_contact, R.id.matchmaker_language} //tisti @+id, so številke shranjene v R.id
+                new String[]{"username", "contact", "game","game_times","language"},
+                new int[]{R.id.matchmaker_username, R.id.matchmaker_contact, R.id.matchmaker_game, R.id.matchmaker_gametime,R.id.matchmaker_language} //tisti @+id, so številke shranjene v R.id
         );
         user_list.setAdapter(adapter);
     }

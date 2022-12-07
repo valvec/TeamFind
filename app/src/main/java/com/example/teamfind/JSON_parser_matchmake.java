@@ -27,6 +27,16 @@ public class JSON_parser_matchmake {
                     String username = c.getString("username");
                     String contact = c.getString("contact");
                     String game = c.getString("name");
+                    String language = c.getString("language");
+                    int game_times=c.getInt("game_times");
+                    String game_times_str="";
+                    for (int j=0; j<24; j++){
+                        if ((game_times & (int) Math.pow(2,j))!=0) {
+                            game_times_str+=String.valueOf(j)+"h ";
+                        }
+
+
+                    }
                     //String address = c.getString("address");
                     //String gender = c.getString("gender");
 
@@ -38,6 +48,8 @@ public class JSON_parser_matchmake {
                     user.put("username", username);
                     user.put("contact", contact);
                     user.put("game", game);
+                    user.put("game_times", game_times_str);
+                    user.put("language", language);
 
 
                     // adding contact to contact list
