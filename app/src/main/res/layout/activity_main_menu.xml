@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="match_parent"
+
+    android:layout_width="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+        <Button
+            android:id="@+id/GamesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:text="@string/games"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/MatchmakerButton"
+            android:onClick="Login"
+
+
+            />
+
+        <Button
+            android:id="@+id/EditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:text="@string/edit_profile_and_preferences"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/MatchmakerButton"
+            android:layout_below="@id/EditButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:text="@string/find_players"
+            android:layout_centerHorizontal="true"
+            android:onClick="matchmaker"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
