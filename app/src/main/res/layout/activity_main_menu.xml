@@ -18,7 +18,7 @@
             android:text="@string/games"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/MatchmakerButton"
-            android:onClick="Login"
+            android:onClick="games"
 
 
             />
@@ -30,6 +30,7 @@
             android:ems="20"
             android:text="@string/edit_profile_and_preferences"
             android:layout_centerHorizontal="true"
+            android:onClick="Edit"
             />
 
         <Button

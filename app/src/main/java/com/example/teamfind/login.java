@@ -88,9 +88,24 @@ class Login{
             writer.flush();
             writer.close();
             os.close();
+
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoInput(true);
+
+            // blokira, dokler ne dobi odgovora
+            int response = conn.getResponseCode();
+
+            // Convert the InputStream into a string
+            String responseAsString = Global.convertStreamToString(conn.getInputStream());
+            Global.USER_JSON_ARRAY=Global.JSONString2Array(responseAsString);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return conn.getResponseCode();
     }
+
+
+
+
 }

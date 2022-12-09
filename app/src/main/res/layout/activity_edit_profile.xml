@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_height="match_parent"
+
+    android:layout_width="match_parent">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_times_to_play"
+        android:layout_above="@id/time_select"
+        />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/rel"
+        android:id="@+id/time_select"
+        android:layout_marginVertical="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="1h"
+                android:id="@+id/h1"
+
+                />
+
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="2h"
+                android:id="@+id/h2"
+
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="3h"
+                android:id="@+id/h3"
+
+
+
+                />
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="4h"
+                android:id="@+id/h4"
+
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="5h"
+                android:id="@+id/h5"
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="6h"
+                android:id="@+id/h6"
+
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="7h"
+                android:id="@+id/h7"
+
+                />
+
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="8h"
+                android:id="@+id/h8"
+
+
+
+                />
+            <Button
+
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="9h"
+                android:id="@+id/h9"
+
+
+                />
+
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="10h"
+                android:id="@+id/h10"
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="11h"
+                android:id="@+id/h11"
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="12h"
+                android:id="@+id/h12"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="13h"
+                android:id="@+id/h13"
+
+                />
+
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="14h"
+
+                android:id="@+id/h14"
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="15h"
+                android:id="@+id/h15"
+
+
+                />
+            <Button
+
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="16h"
+
+                android:id="@+id/h16"
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="17h"
+                android:id="@+id/h17"
+
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="18h"
+                android:id="@+id/h18"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="19h"
+                android:id="@+id/h19"
+
+                />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="20h"
+                android:id="@+id/h20"
+
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="21h"
+                android:id="@+id/h21"
+
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="22h"
+                android:id="@+id/h22"
+
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="23h"
+                android:id="@+id/h23"
+
+
+                />
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="0h"
+                android:id="@+id/h0"
+                />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/rel"
+        >
+
+
+
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/edit_contact"
+            android:onClick="Update"
+
+
+            />
+
+        <EditText
+            android:id="@+id/edit_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Language"
+            android:layout_centerHorizontal="true"
+            />
+
+        <EditText
+            android:id="@+id/edit_pass"
+            android:layout_below="@id/edit_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_centerHorizontal="true"
+            android:text="New"
+            />
+
+
+        <EditText
+            android:id="@+id/edit_contact"
+            android:layout_below="@id/edit_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            android:layout_centerHorizontal="true"
+            android:text="contact"
+            />
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
