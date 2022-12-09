@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.mainActivity=this;
+
     }
 
     public void Login(View view) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
         public void onUIThread(String sucess){
             Toast.makeText(getApplicationContext(),sucess,Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),Global.username2,Toast.LENGTH_LONG).show();
             if (sucess.equals(getResources().getString(R.string.login_sucesfull))){
                 Intent intent = new Intent(this, MainMenu.class);
                 startActivity(intent);

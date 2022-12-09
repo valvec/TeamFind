@@ -2,6 +2,7 @@ package com.example.teamfind;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +11,9 @@ import java.io.InputStreamReader;
 
 public class Global {
     static String username;
+
     static String password;
-    static JSONArray USER_JSON_ARRAY;
+    static JSONObject USER_JSON_OBJECT;
 
 
     static public String convertStreamToString(InputStream is) {

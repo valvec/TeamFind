@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -15,23 +14,33 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class Login{
+class edit_service{
     private final String username;
     private final String password;
     private final String urlStoritve;
+    private final String language;
+    private final String new_pass;
+    private final String contact;
+    private final int game_times;
     private final Activity callerActivity;
+    private final int game_days;
 
-    public Login(String username, String password, Activity callerActivity) {
+    public edit_service(String username, String password, String language, String new_pass, String contact, int game_times, int game_days, Activity callerActivity) {
         this.username = username;
         this.password = password;
         this.callerActivity = callerActivity;
+        this.language=language;
+        this.contact=contact;
+        this.new_pass=new_pass;
+        this.game_times=game_times;
+        this.game_days=game_days;
 
         // ker ta razred ni storitev, moramo do resource-ov dostopati preko klicatelja, ki je storitev
-        urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_login);
+        urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_update);
         //urlStoritve ="http://192.168.1.95/TF/user.php?username=user&amp;intent=login";
     }
 
-    public String login() {
+    public String update() {
         ConnectivityManager connMgr = (ConnectivityManager) callerActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo;
 
@@ -46,11 +55,14 @@ class Login{
             try {
                 int responseCode = connect(username, password);
 
-                if(responseCode==200){
-                    return callerActivity.getResources().getString(R.string.login_sucesfull);
+                if(responseCode==204){
+
+                    Global.password=new_pass;
+                    return callerActivity.getResources().getString(R.string.update_sucesfull);
+
                 }
                 else{
-                    return callerActivity.getResources().getString(R.string.login_failed)+" "+responseCode;
+                    return callerActivity.getResources().getString(R.string.update_failed)+" "+responseCode;
 
                 }
             } catch (IOException e) {
@@ -71,18 +83,19 @@ class Login{
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(5000 /* milliseconds */);
         conn.setConnectTimeout(10000 /* milliseconds */);
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod("PUT");
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setDoInput(true);
-        conn.setRequestProperty("Accept", "application/json");
         conn.setDoInput(true);
 
         try {
             JSONObject json = new JSONObject();
             json.put("username", username);
             json.put("password", password);
-            Global.password=password;
-            Global.username=username;
+            json.put("new_password", new_pass);
+            json.put("contact", contact);
+            json.put("language", language);
+            json.put("game_times", game_times);
+            json.put("game_days", game_days);
 
             // Starts the query
             OutputStream os = conn.getOutputStream();
@@ -94,14 +107,6 @@ class Login{
 
             // blokira, dokler ne dobi odgovora
             int response = conn.getResponseCode();
-
-            // Convert the InputStream into a string
-            String responseAsString = Global.convertStreamToString(conn.getInputStream());
-
-            JSONObject c = new JSONObject(responseAsString);
-
-            Global.USER_JSON_OBJECT=c;
-            Log.e("HERE2",c.getString("username"));
 
 
         } catch (Exception e) {
