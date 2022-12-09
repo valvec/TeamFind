@@ -27,11 +27,18 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
 
         try {
             TextView tv = findViewById(R.id.edit_contact);
-            tv.setText(Global.USER_JSON_OBJECT.getString("contact"));
+            if (Global.USER_JSON_OBJECT.getString("contact").length()>3) {
+                tv.setText(Global.USER_JSON_OBJECT.getString("contact"));
+            }
+
             tv = findViewById(R.id.edit_pass);
             tv.setText(Global.password);
+
             tv = findViewById(R.id.edit_language);
-            tv.setText(Global.USER_JSON_OBJECT.getString("language"));
+            if (Global.USER_JSON_OBJECT.getString("language").length()>3) {
+                tv.setText(Global.USER_JSON_OBJECT.getString("language"));
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
