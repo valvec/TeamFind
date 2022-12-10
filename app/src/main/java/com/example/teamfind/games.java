@@ -36,8 +36,7 @@ public class games extends AppCompatActivity {
                 // Get the item at the clicked position
                 Object item = parent.getItemAtPosition(position);
                 try {
-                    String game_name = podatki.getJSONObject(position).getString("name");
-                    Toast.makeText(getApplicationContext(),game_name,Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getApplicationContext(), game_details.class);
                     intent.putExtra("name",podatki.getJSONObject(position).getString("name"));
                     intent.putExtra("description",podatki.getJSONObject(position).getString("description"));
