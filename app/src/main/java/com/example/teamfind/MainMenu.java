@@ -24,4 +24,9 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
     }
+
+    public void games(View view) {
+        Intent intent = new Intent(this, games.class);
+        startActivity(intent);
+    }
 }

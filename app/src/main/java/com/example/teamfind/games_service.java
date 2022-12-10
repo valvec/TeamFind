@@ -7,31 +7,42 @@ import android.net.NetworkInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class matchmaker_service{
+class games_service{
     private final String username;
-
+    private final boolean for_user;
     private final String urlStoritve;
     private final Activity callerActivity;
 
-    public matchmaker_service(String username, Activity callerActivity) {
+    public games_service(String username, boolean for_user,Activity callerActivity) {
         this.username = username;
-
+        this.for_user=for_user;
         this.callerActivity = callerActivity;
 
         // ker ta razred ni storitev, moramo do resource-ov dostopati preko klicatelja, ki je storitev
-        urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_matchmaker);
+        if (for_user) {
+            urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_games_user);
+        }
+        else{
+            urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_games);
+        }
+
+
 
     }
 
-    public JSONArray matchmaker_service() {
+    public JSONArray get_games() {
         ConnectivityManager connMgr = (ConnectivityManager) callerActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
 
@@ -49,11 +60,11 @@ class matchmaker_service{
 
             } catch (IOException e) {
                 e.printStackTrace();
-               // return callerActivity.getResources().getString(R.string.napaka_storitev);
+                // return callerActivity.getResources().getString(R.string.napaka_storitev);
             }
         }
         else{
-           // return callerActivity.getResources().getString(R.string.napaka_omrezje);
+            // return callerActivity.getResources().getString(R.string.napaka_omrezje);
         }
         return null;
     }
@@ -61,15 +72,45 @@ class matchmaker_service{
     // Given a URL, establishes an HttpUrlConnection and retrieves
     // the content as a InputStream, which it returns as a string.
     private JSONArray connect(String username) throws IOException {
-        URL url = new URL(urlStoritve+"&username="+username);
+        URL url;
+        if (for_user) {
+            url = new URL(urlStoritve + "&username=" + username);
+        }
+        else{
+            url = new URL(urlStoritve);
+        }
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(5000 /* milliseconds */);
         conn.setConnectTimeout(10000 /* milliseconds */);
-        conn.setRequestMethod("GET");
+        if (for_user) {
+            conn.setRequestMethod("POST");
+        }
+        else{
+            conn.setRequestMethod("GET");
+        }
+
         conn.setRequestProperty("Accept", "application/json");
         conn.setDoInput(true);
 
+        if (for_user) {
+            try {
+                JSONObject json = new JSONObject();
+                json.put("username", username);
+                json.put("password", Global.password);
+
+
+                // Starts the query
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(json.toString());
+                writer.flush();
+                writer.close();
+                os.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         // blokira, dokler ne dobi odgovora
         int response = conn.getResponseCode();
 
