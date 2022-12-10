@@ -41,6 +41,7 @@ public class games extends AppCompatActivity {
                     intent.putExtra("name",podatki.getJSONObject(position).getString("name"));
                     intent.putExtra("description",podatki.getJSONObject(position).getString("description"));
                     intent.putExtra("average_rating",podatki.getJSONObject(position).getString("average_rating"));
+                    intent.putExtra("ID",podatki.getJSONObject(position).getString("ID"));
                     startActivity(intent);
 
 

@@ -1,9 +1,13 @@
 package com.example.teamfind;
 
+import static com.example.teamfind.Global.password;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +21,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Objects;
 
 class games_service{
     private final String username;
@@ -97,7 +103,7 @@ class games_service{
             try {
                 JSONObject json = new JSONObject();
                 json.put("username", username);
-                json.put("password", Global.password);
+                json.put("password", password);
 
 
                 // Starts the query
@@ -151,4 +157,80 @@ class games_service{
 
         return jsonArray;
     }
+
+    public int game_interact(String ID, String intent, int subscribed,int rating){
+    ConnectivityManager connMgr = (ConnectivityManager) callerActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo networkInfo = null;
+
+        try {
+        networkInfo = connMgr.getActiveNetworkInfo();
+    }
+        catch (Exception e){
+        //je v manifestu dovoljenje za uporabo omrezja?
+        //return callerActivity.getResources().getString(R.string.napaka_omrezje);
+            }
+        if (networkInfo != null && networkInfo.isConnected()) {
+        try {
+
+            return connect_2_interact(ID,intent, subscribed, rating);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // return callerActivity.getResources().getString(R.string.napaka_storitev);
+            }
+        }
+        else{
+        // return callerActivity.getResources().getString(R.string.napaka_omrezje);
+         }
+        return -2;
+    }
+
+    private int connect_2_interact(String ID,String intent, int subscribed ,int rating) throws IOException {
+        URL url = new URL(urlStoritve+"?username="+username+"&intent="+intent);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(5000 /* milliseconds */);
+        conn.setConnectTimeout(10000 /* milliseconds */);
+        conn.setRequestMethod("PUT");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoInput(true);
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setDoInput(true);
+
+        try {
+            JSONObject json = new JSONObject();
+            json.put("username", username);
+            json.put("password",password);
+            json.put("game_id", ID);
+
+            if ("rate".equals(intent)){
+                json.put("rating", rating);
+                Log.e("gg", String.valueOf(rating));
+                Log.e("gg", ID);
+            }
+            if ("subscribe".equals(intent)){
+                json.put("subscribed", subscribed);
+            }
+
+            // Starts the query
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(json.toString());
+            writer.flush();
+            writer.close();
+            os.close();
+
+            // blokira, dokler ne dobi odgovora
+            int response = conn.getResponseCode();
+            return response;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+
+    }
+
+
 }
