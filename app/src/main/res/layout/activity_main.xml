@@ -58,6 +58,24 @@
         />
 
 </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="Register_activity"
+        android:background="@color/teal_200"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+
+        />
 </RelativeLayout>
 
 

@@ -9,6 +9,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class game_details extends AppCompatActivity {
     Intent intent;
     RatingBar ratingBar;
@@ -29,8 +33,28 @@ public class game_details extends AppCompatActivity {
         Desc.setText(gameDesc);
         ratingBar.setRating(Float.parseFloat(intent.getStringExtra("average_rating")));
 
+        games_service games_service = new games_service(Global.username,false, this);
+        new Thread() {
+            @Override
+            public void run() {
+                JSONObject podatki = games_service.get_relation(intent.getStringExtra("ID"));
+                runOnUiThread(() -> User_pref(podatki));
+            }
+        }.start();
+
 
 // Set the number of stars to display
+
+    }
+
+    private void User_pref(JSONObject data) {
+            if (data != null ){
+            try {
+                String Users_rating = data.getString("rating");
+                Toast.makeText(getApplicationContext(),Users_rating,Toast.LENGTH_SHORT).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }}
 
     }
 

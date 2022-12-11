@@ -7,7 +7,6 @@
 
     <application
         android:allowBackup="true"
-        android:windowActionBar="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamFind"
         android:usesCleartextTraffic="true"
+        android:windowActionBar="false"
         tools:targetApi="31">
+        <activity
+            android:name=".register"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".game_details"
             android:exported="false">

@@ -233,4 +233,70 @@ class games_service{
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public JSONObject get_relation(String game_id) {
+        ConnectivityManager connMgr = (ConnectivityManager) callerActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = null;
+
+        try {
+            networkInfo = connMgr.getActiveNetworkInfo();
+        }
+        catch (Exception e){
+            //je v manifestu dovoljenje za uporabo omrezja?
+            //return callerActivity.getResources().getString(R.string.napaka_omrezje);
+        }
+        if (networkInfo != null && networkInfo.isConnected()) {
+            try {
+
+                return connectforrelation(username, game_id);
+
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+                // return callerActivity.getResources().getString(R.string.napaka_storitev);
+            }
+        }
+        else{
+            // return callerActivity.getResources().getString(R.string.napaka_omrezje);
+        }
+        return null;
+    }
+
+    // Given a URL, establishes an HttpUrlConnection and retrieves
+    // the content as a InputStream, which it returns as a string.
+    private JSONObject connectforrelation(String username, String game_id) throws IOException, JSONException {
+        URL url;
+
+        url = new URL(urlStoritve + "?intent=get_game_relation&username=" + username + "&game_id=" + game_id);
+
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(5000 /* milliseconds */);
+        conn.setConnectTimeout(10000 /* milliseconds */);
+        conn.setRequestMethod("GET");
+
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setDoInput(true);
+
+        // blokira, dokler ne dobi odgovora
+        int response = conn.getResponseCode();
+
+        // Convert the InputStream into a string
+        String responseAsString = convertStreamToString(conn.getInputStream());
+        Log.e("here",responseAsString);
+        return new JSONObject(responseAsString);
+    }
+
+
 }

@@ -26,5 +26,12 @@
     <string name="URL_rel_games_user">games.php?intent=get</string>
     <string name="submit_rating">Submit</string>
     <string name="subscribe">Subscribe</string>
+    <string name="submit">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="register">Register to TeamFind</string>
+    <string name="select_language">Select language</string>
+    <string name="URL_rel_register">user.php</string>
 
 </resources>
