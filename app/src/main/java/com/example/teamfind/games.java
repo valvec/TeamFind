@@ -1,9 +1,12 @@
 package com.example.teamfind;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -28,6 +31,8 @@ public class games extends AppCompatActivity {
         setContentView(R.layout.activity_games);
 
         gridView = findViewById(R.id.gridview);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,6 +98,15 @@ public class games extends AppCompatActivity {
 
 
 
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

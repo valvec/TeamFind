@@ -1,10 +1,14 @@
 package com.example.teamfind;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +20,7 @@ import org.json.JSONObject;
 public class game_details extends AppCompatActivity {
     Intent intent;
     RatingBar ratingBar;
-
+    int subscribe_intent =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,11 @@ public class game_details extends AppCompatActivity {
         intent = getIntent();
         String gameName = intent.getStringExtra("name");
         String gameDesc = intent.getStringExtra("description");
+
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         TextView Name = findViewById(R.id.title);
@@ -47,11 +56,30 @@ public class game_details extends AppCompatActivity {
 
     }
 
+
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void User_pref(JSONObject data) {
             if (data != null ){
             try {
                 String Users_rating = data.getString("rating");
-                Toast.makeText(getApplicationContext(),Users_rating,Toast.LENGTH_SHORT).show();
+                TextView tv=findViewById(R.id.myrating);
+                tv.setText("My rating: "+Users_rating);
+                int sub= Integer.parseInt(data.getString("subscribed"));
+                if (sub!=0){
+                    Button btn = findViewById(R.id.subscribe_button);
+                    btn.setText("UNSUBSCRIBE");
+                    subscribe_intent=0;
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }}
@@ -90,7 +118,7 @@ public class game_details extends AppCompatActivity {
         new Thread(){
             @Override
             public void run(){
-                int sucess=games_service.game_interact(intent.getStringExtra("ID"),"subscribe",1,-1);
+                int sucess=games_service.game_interact(intent.getStringExtra("ID"),"subscribe",subscribe_intent,-1);
                 runOnUiThread(()-> onUIThread(sucess));
             }
 
