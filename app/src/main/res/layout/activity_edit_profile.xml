@@ -11,10 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_times_to_play"
-        android:layout_above="@id/time_select"
+        android:layout_above="@id/time_select_oustside"
         />
 
-
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/time_select_oustside"
+        >
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -26,75 +30,80 @@
         android:layout_marginVertical="20dp"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            >
-
-            <Button
 
 
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="1h"
-                android:id="@+id/h1"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
 
-                />
+                >
 
-            <Button
-
-
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="2h"
-                android:id="@+id/h2"
+                <Button
 
 
+                    android:id="@+id/h1"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="1h"
 
-                />
-            <Button
+                    />
 
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="3h"
-                android:id="@+id/h3"
-
-
-
-                />
-            <Button
+                <Button
 
 
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="4h"
-                android:id="@+id/h4"
+                    android:id="@+id/h2"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="2h"
 
 
+                    />
 
-                />
-            <Button
+                <Button
 
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="5h"
-                android:id="@+id/h5"
-
-
-                />
-            <Button
-
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:text="6h"
-                android:id="@+id/h6"
-
-                />
+                    android:id="@+id/h3"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="3h"
 
 
-        </LinearLayout>
+                    />
+
+                <Button
+
+
+                    android:id="@+id/h4"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="4h"
+
+
+                    />
+
+                <Button
+
+                    android:id="@+id/h5"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="5h"
+
+
+                    />
+
+                <Button
+
+                    android:id="@+id/h6"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="6h"
+
+                    />
+
+
+            </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -281,7 +290,7 @@
 
     </LinearLayout>
 
-
+</HorizontalScrollView >
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -306,19 +315,16 @@
 
             />
 
-        <EditText
-            android:id="@+id/edit_language"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/language_spinner"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Language"
-            android:layout_centerHorizontal="true"
-            />
+            android:hint="@string/select_language"
+            android:entries="@array/languages" />
 
         <EditText
             android:id="@+id/edit_pass"
-            android:layout_below="@id/edit_language"
+            android:layout_below="@id/language_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"

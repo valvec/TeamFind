@@ -13,6 +13,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class register extends AppCompatActivity {
 
     @Override
@@ -23,27 +30,64 @@ public class register extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         Spinner spino = findViewById(R.id.language_spinner);
-        final String[] languages = { "Select Language","slovenian", "english",
-                "croatian", "german",
-                "chinese", "korean" };
+        List<String> languages = new ArrayList<String>();
 
-        // Create the instance of ArrayAdapter
-        // having the list of courses
-        ArrayAdapter ad
-                = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                languages);
+        lang lang= new lang(this);
 
-        // set simple layout resource file
-        // for each item of spinner
-        ad.setDropDownViewResource(
-                android.R.layout
-                        .simple_spinner_dropdown_item);
+        new Thread(){
+            @Override
+            public void run(){
+                JSONArray langs=lang.lang();
+                runOnUiThread(()-> language(langs));
 
-        // Set the ArrayAdapter (ad) data on the
-        // Spinner which binds data to spinner
-        spino.setAdapter(ad);
+            }
+
+            private void language(JSONArray langs) {
+                for (int i = 0; i < langs.length(); i++) {
+                    JSONObject c = null;
+                    try {
+                        c = langs.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    String lang = null;
+                    try {
+                        lang = c.getString("lang_eng");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    languages.add(lang);
+
+
+                    String[] simpleArray = new String[ languages.size() ];
+                    languages.toArray( simpleArray );
+
+                    ArrayAdapter ad
+                            = new ArrayAdapter(
+                            register.this,
+                            android.R.layout.simple_spinner_item,
+                            languages);
+
+                    // set simple layout resource file
+                    // for each item of spinner
+                    ad.setDropDownViewResource(
+                            android.R.layout
+                                    .simple_spinner_dropdown_item);
+
+                    // Set the ArrayAdapter (ad) data on the
+                    // Spinner which binds data to spinner
+                    spino.setAdapter(ad);
+
+
+
+
+                }
+            }
+
+        }.start();
+
+
     }
 
 

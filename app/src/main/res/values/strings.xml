@@ -33,5 +33,6 @@
     <string name="register">Register to TeamFind</string>
     <string name="select_language">Select language</string>
     <string name="URL_rel_register">user.php</string>
+    <string name="URL_rel_lang">lang.php</string>
 
 </resources>

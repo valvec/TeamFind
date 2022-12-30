@@ -9,11 +9,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EditProfile extends AppCompatActivity  implements View.OnClickListener{
 
@@ -30,6 +38,75 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
+
+        Spinner spino = findViewById(R.id.language_spinner);
+        List<String> languages = new ArrayList<String>();
+
+        lang lang= new lang(this);
+
+        new Thread(){
+            @Override
+            public void run(){
+                JSONArray langs=lang.lang();
+                runOnUiThread(()-> language(langs));
+
+            }
+
+            private void language(JSONArray langs) {
+                for (int i = 0; i < langs.length(); i++) {
+                    JSONObject c = null;
+                    try {
+                        c = langs.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    String lang = null;
+                    try {
+                        lang = c.getString("lang_eng");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    languages.add(lang);
+
+
+                    String[] simpleArray = new String[ languages.size() ];
+                    languages.toArray( simpleArray );
+
+                    ArrayAdapter ad
+                            = new ArrayAdapter(
+                            EditProfile.this,
+                            android.R.layout.simple_spinner_item,
+                            languages);
+
+                    // set simple layout resource file
+                    // for each item of spinner
+                    ad.setDropDownViewResource(
+                            android.R.layout
+                                    .simple_spinner_dropdown_item);
+
+                    // Set the ArrayAdapter (ad) data on the
+                    // Spinner which binds data to spinner
+                    spino.setAdapter(ad);
+
+                    try {
+                        if (Global.USER_JSON_OBJECT.getString("language").length()>3) {
+                            Spinner spinner = findViewById(R.id.language_spinner);
+
+                            int pos = languages.indexOf(Global.USER_JSON_OBJECT.getString("language"));
+
+                            spinner.setSelection(pos);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
+
+        }.start();
+
         try {
             TextView tv = findViewById(R.id.edit_contact);
             if (Global.USER_JSON_OBJECT.getString("contact").length()>3) {
@@ -38,12 +115,6 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
 
             tv = findViewById(R.id.edit_pass);
             tv.setText(Global.password);
-
-            tv = findViewById(R.id.edit_language);
-            if (Global.USER_JSON_OBJECT.getString("language").length()>3) {
-                tv.setText(Global.USER_JSON_OBJECT.getString("language"));
-            }
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -133,11 +204,13 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
 
 
     public void Update(View view) {
-        TextView lng_view = findViewById(R.id.edit_language);
+
         TextView pass_view=findViewById(R.id.edit_pass);
         TextView contact_view=findViewById(R.id.edit_contact);
 
-        language=lng_view.getText().toString();
+        Spinner sv = findViewById(R.id.language_spinner);
+        int position = sv.getSelectedItemPosition();
+        language = sv.getItemAtPosition(position).toString();
         new_password =pass_view.getText().toString();
         contact=contact_view.getText().toString();
         int game_days= 1|2|4|8|16|32|64;
