@@ -31,7 +31,6 @@ class register_service{
         this.email= email;
 
 
-        // ker ta razred ni storitev, moramo do resource-ov dostopati preko klicatelja, ki je storitev
         urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_register);
         //urlStoritve ="http://192.168.1.95/TF/user.php?username=user&amp;intent=login";
     }
@@ -44,7 +43,7 @@ class register_service{
             networkInfo = connMgr.getActiveNetworkInfo();
         }
         catch (Exception e){
-            //je v manifestu dovoljenje za uporabo omrezja?
+
             return callerActivity.getResources().getString(R.string.napaka_omrezje);
         }
         if (networkInfo != null && networkInfo.isConnected()) {

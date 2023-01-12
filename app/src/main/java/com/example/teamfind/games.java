@@ -54,10 +54,16 @@ public class games extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                // Do something with the item
+
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 
 
@@ -90,7 +96,7 @@ public class games extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        // Set up the grid view
+
         GridView gridView = findViewById(R.id.gridview);
         SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.game_tile,
                 new String[]{"name", "average_rating"}, new int[]{R.id.text1, R.id.text2});

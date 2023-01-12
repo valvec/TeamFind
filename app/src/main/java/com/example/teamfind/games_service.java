@@ -236,16 +236,6 @@ class games_service{
 
 
 
-
-
-
-
-
-
-
-
-
-
     public JSONObject get_relation(String game_id) {
         ConnectivityManager connMgr = (ConnectivityManager) callerActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
@@ -254,8 +244,7 @@ class games_service{
             networkInfo = connMgr.getActiveNetworkInfo();
         }
         catch (Exception e){
-            //je v manifestu dovoljenje za uporabo omrezja?
-            //return callerActivity.getResources().getString(R.string.napaka_omrezje);
+
         }
         if (networkInfo != null && networkInfo.isConnected()) {
             try {
@@ -289,10 +278,8 @@ class games_service{
         conn.setRequestProperty("Accept", "application/json");
         conn.setDoInput(true);
 
-        // blokira, dokler ne dobi odgovora
         int response = conn.getResponseCode();
 
-        // Convert the InputStream into a string
         String responseAsString = convertStreamToString(conn.getInputStream());
         Log.e("here",responseAsString);
         return new JSONObject(responseAsString);

@@ -79,14 +79,12 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
                             android.R.layout.simple_spinner_item,
                             languages);
 
-                    // set simple layout resource file
-                    // for each item of spinner
+
                     ad.setDropDownViewResource(
                             android.R.layout
                                     .simple_spinner_dropdown_item);
 
-                    // Set the ArrayAdapter (ad) data on the
-                    // Spinner which binds data to spinner
+
                     spino.setAdapter(ad);
 
                     try {
@@ -182,24 +180,14 @@ public class EditProfile extends AppCompatActivity  implements View.OnClickListe
         }
         int game_hour_coded= (int) Math.pow(2,hour);
         game_times = game_times | game_hour_coded;
-/*
-        try {
-            JSONObject json_obj = Global.USER_JSON_ARRAY.getJSONObject(0);
-            int prev_game_times = json_obj.getInt("game_times");
-            Toast.makeText(this,String.valueOf(prev_game_times),Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
 
-        }
-
-*/
         String b=String.valueOf(game_times);
 
 
         button.setBackgroundColor(Color.WHITE);
 
 
-        Toast.makeText(this,b,Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,b,Toast.LENGTH_SHORT).show();
     }
 
 

@@ -35,7 +35,7 @@ class edit_service{
         this.game_times=game_times;
         this.game_days=game_days;
 
-        // ker ta razred ni storitev, moramo do resource-ov dostopati preko klicatelja, ki je storitev
+
         urlStoritve = callerActivity.getString(R.string.URL_base_storitve) + callerActivity.getString(R.string.URL_rel_update);
         //urlStoritve ="http://192.168.1.95/TF/user.php?username=user&amp;intent=login";
     }
@@ -75,8 +75,7 @@ class edit_service{
         }
     }
 
-    // Given a URL, establishes an HttpUrlConnection and retrieves
-    // the content as a InputStream, which it returns as a string.
+
     private int connect(String username, String password) throws IOException {
         URL url = new URL(urlStoritve+"&username="+username);
 

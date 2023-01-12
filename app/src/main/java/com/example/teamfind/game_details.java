@@ -52,7 +52,7 @@ public class game_details extends AppCompatActivity {
         }.start();
 
 
-// Set the number of stars to display
+
 
     }
 

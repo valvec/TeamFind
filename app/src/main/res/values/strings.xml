@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TeamFind</string>
-    <string name="napaka_omrezje">Napaka omrezja</string>
+    <string name="napaka_omrezje">Network error</string>
     <string name="URL_base_storitve">http://192.168.1.95/TF/</string>
     <string name="URL_rel_login">user.php?intent=login</string>
-    <string name="login_sucesfull">Login sucessfull</string>
+    <string name="login_sucesfull">Login successful</string>
     <string name="login_failed">login failed</string>
     <string name="napaka_storitev">napaka</string>
     <string name="edit_profile_and_preferences">Edit profile and preferences</string>

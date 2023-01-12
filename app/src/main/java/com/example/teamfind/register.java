@@ -69,14 +69,10 @@ public class register extends AppCompatActivity {
                             android.R.layout.simple_spinner_item,
                             languages);
 
-                    // set simple layout resource file
-                    // for each item of spinner
                     ad.setDropDownViewResource(
                             android.R.layout
                                     .simple_spinner_dropdown_item);
 
-                    // Set the ArrayAdapter (ad) data on the
-                    // Spinner which binds data to spinner
                     spino.setAdapter(ad);
 
 

@@ -37,14 +37,10 @@ public class JSON_parser_matchmake {
 
 
                     }
-                    //String address = c.getString("address");
-                    //String gender = c.getString("gender");
 
-
-                    // tmp hash map for single contact
                     HashMap<String, String> user = new HashMap<>();
 
-                    // adding each child node to HashMap key => value
+
                     user.put("username", username);
                     user.put("contact", contact);
                     user.put("game", game);
@@ -52,7 +48,7 @@ public class JSON_parser_matchmake {
                     user.put("language", language);
 
 
-                    // adding contact to contact list
+
                     userslist.add(user);
 
                 }

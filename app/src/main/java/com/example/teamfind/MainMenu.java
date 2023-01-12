@@ -20,6 +20,12 @@ public class MainMenu extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
+
     public void Edit(View view) {
         Intent intent = new Intent(this, EditProfile.class);
         startActivity(intent);
